@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let gameResult;
+      let userWin = 0;
+      let computerWin = 0;
+
+      function computerPlay() {
+        computerChoice = Math.floor(Math.random() * 3);
+        if (computerChoice === 2) {
+          return "scissors";
+        } else if (computerChoice === 1) {
+          return "paper";
+        }
+        return "rock";
+      }
+
+      function playerChoice() {
+        let playerInput = prompt(
+          "It's RPS baby! Please input either rock, paper, or scissors:"
+        ).toLowerCase();
+        return playerInput;
+      }
+      function playRound() {
+        let playerSelection = playerChoice();
+        let computerSelection = computerPlay();
+
+        console.log(playerSelection);
+        console.log(computerSelection);
+
+        if (
+          (playerSelection === "rock" && computerSelection === "scissors") ||
+          (playerSelection === "paper" && computerSelection === "rock") ||
+          (playerSelection === "scissors" && computerSelection === "paper")
+        ) {
+          ++userWin;
+          gameResult = `You win! ${playerSelection} beats ${computerSelection}!`;
+          return gameResult;
+        } else if (
+          (playerSelection === "rock" && computerSelection === "paper") ||
+          (playerSelection === "paper" && computerSelection === "scissors") ||
+          (playerSelection === "scissors" && computerSelection === "rock")
+        ) {
+          ++computerWin;
+          gameResult = `You lose! ${computerSelection} beats ${playerSelection}!`;
+          return gameResult;
+        } else {
+          gameResult = "Tie! Please select again.";
+          return gameResult;
+        }
+      }
+
+      for (round = 0; round < 5; round++) {
+        console.log(playRound());
+        console.log("Player: " + userWin + "\nComputer: " + computerWin);
+      }
+
+      if (userWin > computerWin) {
+        console.log("Congratulations, you won the best of 5 game!");
+      } else if (computerWin > userWin) {
+        console.log("F  \nYou lost, better luck next time :(");
+      } else {
+        console.log("Huh, you actually tied ¯\\_(ツ)_/¯");
+      }
+    </script>
+  </body>
+</html>
